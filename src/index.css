@@ -1,0 +1,266 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "DM Mono", ui-monospace, monospace;
+
+  --color-ink: #121212;
+  --color-paper: #fff7e8;
+  --color-bubblegum: #ff7eb6;
+  --color-zap: #c8f031;
+  --color-grape: #b8a1ff;
+  --color-ice: #74d3ff;
+  --color-butter: #ffd84a;
+  --color-peach: #ff9f6b;
+}
+
+/* flat dot grid via SVG (no gradients anywhere) */
+body {
+  background-color: var(--color-paper);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Ccircle cx='2' cy='2' r='1.4' fill='%23121212' fill-opacity='.16'/%3E%3C/svg%3E");
+  color: var(--color-ink);
+}
+
+::selection {
+  background: var(--color-bubblegum);
+  color: var(--color-ink);
+}
+
+@layer components {
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border: 3px solid var(--color-ink);
+    border-radius: 9999px;
+    padding: 0.6rem 1.2rem;
+    font-weight: 800;
+    line-height: 1.1;
+    cursor: pointer;
+    background: #fff;
+    color: var(--color-ink);
+    box-shadow: 4px 4px 0 var(--color-ink);
+    transition: translate 0.12s ease, box-shadow 0.12s ease;
+  }
+  .btn:hover {
+    translate: -2px -2px;
+    box-shadow: 6px 6px 0 var(--color-ink);
+  }
+  .btn:active {
+    translate: 4px 4px;
+    box-shadow: 0 0 0 var(--color-ink);
+  }
+  .btn:focus-visible,
+  .chip:focus-visible,
+  .pick:focus-visible,
+  .swatch:focus-visible,
+  .card-action:focus-visible {
+    outline: 3px solid var(--color-bubblegum);
+    outline-offset: 2px;
+  }
+
+  .chip {
+    border: 3px solid var(--color-ink);
+    border-radius: 9999px;
+    padding: 0.35rem 0.9rem;
+    font-weight: 800;
+    font-size: 0.9rem;
+    cursor: pointer;
+    background: #fff;
+    transition: translate 0.12s ease, background 0.12s ease;
+  }
+  .chip:hover {
+    translate: 0 -2px;
+  }
+  .chip[data-active="true"] {
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  .tab {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 3px solid var(--color-ink);
+    border-radius: 1rem;
+    padding: 0.6rem 1.1rem;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.15rem;
+    cursor: pointer;
+    background: #fff;
+    box-shadow: 4px 4px 0 var(--color-ink);
+    transition: translate 0.12s ease, box-shadow 0.12s ease;
+  }
+  .tab:hover {
+    translate: -2px -2px;
+    box-shadow: 6px 6px 0 var(--color-ink);
+  }
+  .tab[data-active="true"] {
+    translate: 2px 2px;
+    box-shadow: 0 0 0 var(--color-ink);
+  }
+  .tab:focus-visible {
+    outline: 3px solid var(--color-bubblegum);
+    outline-offset: 2px;
+  }
+  .tab-count {
+    border: 2px solid var(--color-ink);
+    border-radius: 9999px;
+    padding: 0 0.45rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    background: #fff;
+  }
+
+  .brut {
+    border: 3px solid var(--color-ink);
+    border-radius: 1.5rem;
+    box-shadow: 8px 8px 0 var(--color-ink);
+  }
+
+  .brut-input {
+    width: 100%;
+    border: 3px solid var(--color-ink);
+    border-radius: 1rem;
+    background: #fff;
+    padding: 0.7rem 1rem;
+    font-weight: 600;
+    box-shadow: 4px 4px 0 var(--color-ink);
+    outline: none;
+    transition: translate 0.12s ease, box-shadow 0.12s ease;
+  }
+  .brut-input::placeholder {
+    color: rgb(18 18 18 / 0.45);
+    font-weight: 500;
+  }
+  .brut-input:focus {
+    translate: -2px -2px;
+    box-shadow: 6px 6px 0 var(--color-bubblegum);
+  }
+
+  .card {
+    border: 3px solid var(--color-ink);
+    border-radius: 1.25rem;
+    box-shadow: 6px 6px 0 var(--color-ink);
+    overflow: hidden;
+    rotate: var(--tilt, 0deg);
+    transition: rotate 0.15s ease, translate 0.15s ease, box-shadow 0.15s ease;
+  }
+  .card:hover {
+    rotate: 0deg;
+    translate: -3px -3px;
+    box-shadow: 10px 10px 0 var(--color-ink);
+  }
+
+  .emoji-tile {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 3.25rem;
+    height: 3.25rem;
+    font-size: 1.75rem;
+    background: #fff;
+    border: 3px solid var(--color-ink);
+    border-radius: 1rem;
+  }
+
+  .pick {
+    display: grid;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.3rem;
+    cursor: pointer;
+    background: #fff;
+    border: 3px solid var(--color-ink);
+    border-radius: 0.8rem;
+    transition: translate 0.1s ease, box-shadow 0.1s ease;
+  }
+  .pick:hover {
+    translate: 0 -2px;
+  }
+  .pick[data-active="true"] {
+    background: var(--color-butter);
+    translate: -1px -1px;
+    box-shadow: 3px 3px 0 var(--color-ink);
+  }
+
+  .swatch {
+    width: 2.25rem;
+    height: 2.25rem;
+    cursor: pointer;
+    border: 3px solid var(--color-ink);
+    border-radius: 9999px;
+    transition: scale 0.1s ease;
+  }
+  .swatch:hover {
+    scale: 1.1;
+  }
+  .swatch[data-active="true"] {
+    outline: 3px solid var(--color-ink);
+    outline-offset: 3px;
+  }
+
+  .card-action {
+    flex: 1;
+    padding: 0.55rem 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 800;
+    cursor: pointer;
+    background: rgb(255 255 255 / 0.55);
+    transition: background 0.1s ease, color 0.1s ease;
+  }
+  .card-action:hover {
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+}
+
+/* ticker */
+.marquee {
+  overflow: hidden;
+  background: var(--color-ink);
+  color: var(--color-butter);
+  border-bottom: 3px solid var(--color-ink);
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: scroll 32s linear infinite;
+}
+@keyframes scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    scale: 0.88;
+  }
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    translate: 0 24px;
+  }
+}
+.pop {
+  animation: pop 0.28s cubic-bezier(0.2, 1.5, 0.4, 1) both;
+}
+.rise {
+  animation: rise 0.25s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track,
+  .pop,
+  .rise {
+    animation: none;
+  }
+}
